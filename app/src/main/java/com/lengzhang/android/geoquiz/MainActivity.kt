@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private var answeredList = questionBank.map { false } .toMutableList()
 
     private var currentIndex = 0
+    private var correctCount = 0
+    private var answeredCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +43,17 @@ class MainActivity : AppCompatActivity() {
         questionTextView = findViewById(R.id.question_text_view)
 
         trueButton.setOnClickListener { view: View ->
+            answeredCount++
             checkAnswer(true)
+            updateQuestion()
+            checkDone()
         }
 
         falseButton.setOnClickListener { view: View ->
+            answeredCount++
             checkAnswer(false)
+            updateQuestion()
+            checkDone()
         }
 
         nextButton.setOnClickListener { view: View ->
@@ -102,11 +110,22 @@ class MainActivity : AppCompatActivity() {
             R.string.incorrect_toast
         }
 
+        if (userAnswer == correctAnswer) {
+            correctCount++
+        }
+
         answeredList.set(currentIndex, true)
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
+    }
 
-        updateQuestion()
+    private fun checkDone() {
+        if (answeredCount == questionBank.size) {
+            val grade = correctCount.toFloat() / questionBank.size * 100
+
+            Toast.makeText(this, "${String.format("%.2f", grade)}%", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 }
