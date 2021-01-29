@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         Question(R.string.question_asia, true),
     )
 
+    private var answeredList = questionBank.map { false } .toMutableList()
+
     private var currentIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,6 +84,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuestion() {
         val questionTextResId = questionBank[currentIndex].textResId
         questionTextView.setText(questionTextResId)
+        if (answeredList[currentIndex]) {
+            trueButton.setEnabled(false)
+            falseButton.setEnabled(false)
+        } else {
+            trueButton.setEnabled(true)
+            falseButton.setEnabled(true)
+        }
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
@@ -93,7 +102,11 @@ class MainActivity : AppCompatActivity() {
             R.string.incorrect_toast
         }
 
+        answeredList.set(currentIndex, true)
+
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
+
+        updateQuestion()
     }
 }
