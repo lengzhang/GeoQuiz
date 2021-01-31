@@ -2,14 +2,24 @@
 <resources>
     <string-array name="answers">
         <item>False</item>
+        <item>True</item>
         <item>False</item>
+        <item>True</item>
+        <item>True</item>
+        <item>False</item>
+        <item>True</item>
         <item>True</item>
         <item>False</item>
         <item>True</item>
         <item>True</item>
         <item>True</item>
         <item>False</item>
+        <item>True</item>
+        <item>True</item>
         <item>False</item>
         <item>False</item>
+        <item>True</item>
+        <item>False</item>
+        <item>True</item>
     </string-array>
 </resources>

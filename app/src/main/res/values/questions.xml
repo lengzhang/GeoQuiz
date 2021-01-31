@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="questions">
-        <item>The whale is a fish.</item>
-        <item>The dolphin is not a mammal.</item>
-        <item>The Nile crosses Sudan.</item>
-        <item>The longest part of human body is leg.</item>
-        <item>1 byte is normally made from 8-bit.</item>
-        <item>The hardware is all that in the PC has weight.</item>
-        <item>Sun and Moon can be simultaneously in the sky.</item>
-        <item>The prologue is the final part of a book.</item>
-        <item>During the day you can not see stars.</item>
-        <item>The epicenter is the point from which is originated an earthquake.</item>
+        <item>The UK is about the same size as France.</item>
+        <item>The UK is made up of more than 6000 islands.</item>
+        <item>The highest mountain in the UK is Snowdon.</item>
+        <item>Glasgow is north of Belfast.</item>
+        <item>Brasília is the capital city of Brazil.</item>
+        <item>Mexico is south of the equator.</item>
+        <item>China has only one time zone.</item>
+        <item>The island of Borneo is occupied by three countries.</item>
+        <item>It\'s possible to travel on roads from the United States to South America.</item>
+        <item>The Indian Ocean is the third largest ocean in the world.</item>
+        <item>The Maldives has the lowest high point of any country.</item>
+        <item>Russia borders both North Korea and Norway.</item>
+        <item>No countries share a land border with the United Kingdom.</item>
+        <item>The world\'s tallest waterfall is in Venezuela.</item>
+        <item>Ethiopia is landlocked.</item>
+        <item>The island Aruba belongs to Portugal.</item>
+        <item>There are more countries in Africa than Asia.</item>
+        <item>The currency of Switzerland is the Euro.</item>
+        <item>China borders the same number of countries as Russia.</item>
     </string-array>
 </resources>
