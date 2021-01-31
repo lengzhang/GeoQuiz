@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 
 private const val TAG = "MainActivity"
 private const val KEY_INDEX = "index"
+private const val KEY_IS_CHEATER = "IS_CHEATER"
 private const val REQUEST_CODE_CHEAT = 0
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
         quizViewModel.currentIndex = currentIndex
 
+        val isCheater = savedInstanceState?.getBoolean(KEY_IS_CHEATER, false) ?: false
+        quizViewModel.isCheater = isCheater
+
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
@@ -56,7 +60,8 @@ class MainActivity : AppCompatActivity() {
 
         cheatBUtton.setOnClickListener { view: View ->
             val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
+            val isCheater = quizViewModel.isCheater
+            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue, isCheater)
             startActivityForResult(intent, REQUEST_CODE_CHEAT)
         }
 
@@ -95,6 +100,7 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
         Log.i(TAG, "onSaveInstanceState")
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
+        savedInstanceState.putBoolean(KEY_IS_CHEATER, quizViewModel.isCheater)
     }
 
     override fun onStop() {
