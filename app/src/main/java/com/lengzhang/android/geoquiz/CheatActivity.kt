@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 
-const val EXTRA_ANSWER_SHOWN = "com.lengzhang.android.geoquiz.anser_shown"
+const val EXTRA_ANSWER_SHOWN = "com.lengzhang.android.geoquiz.answer_shown"
 private const val EXTRA_ANSWER_IS_TRUE = "com.lengzhang.android.geoquiz.answer_is_true"
 
 class CheatActivity : AppCompatActivity() {
@@ -31,11 +31,11 @@ class CheatActivity : AppCompatActivity() {
                 else -> R.string.false_button
             }
             answerTextView.setText(answerText)
-            setAnserShowResult(true)
+            setAnswerShowResult(true)
         }
     }
 
-    private fun setAnserShowResult(isAnswerShown: Boolean) {
+    private fun setAnswerShowResult(isAnswerShown: Boolean) {
         val data = Intent().apply {
             putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown)
         }
