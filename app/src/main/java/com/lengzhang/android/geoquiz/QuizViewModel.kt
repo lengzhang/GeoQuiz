@@ -5,7 +5,12 @@ import androidx.lifecycle.ViewModel
 class QuizViewModel : ViewModel() {
 
     var currentIndex = 0
-    var isCheater = false
+    var isCheater
+        set(value) {
+            if (cheaterList[currentIndex] == value) return
+            cheaterList[currentIndex] = value
+        }
+        get() = cheaterList[currentIndex]
 
     private val questionBank = listOf(
         Question(R.string.question_australia, true),
@@ -15,6 +20,8 @@ class QuizViewModel : ViewModel() {
         Question(R.string.question_americas, true),
         Question(R.string.question_asia, true)
     )
+
+    var cheaterList = questionBank.map { false } .toMutableList()
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
