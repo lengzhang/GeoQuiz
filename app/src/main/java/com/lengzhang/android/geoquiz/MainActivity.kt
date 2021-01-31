@@ -29,7 +29,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate(Bundle?) called" )
+        Log.d(TAG, "onCreate(Bundle?) called")
+
+        val questions: Array<String> = resources.getStringArray(R.array.questions)
+        val answers: Array<String> = resources.getStringArray(R.array.answers)
+        quizViewModel.setQuestionBank(questions, answers)
+
         setContentView(R.layout.activity_main)
 
         val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
@@ -108,8 +113,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateQuestion() {
-        val questionTextResId = quizViewModel.currentQuestionText
-        questionTextView.setText(questionTextResId)
+        val questionText = quizViewModel.currentQuestionText
+        questionTextView.text = questionText
     }
 
     private fun checkAnswer(userAnswer: Boolean) {

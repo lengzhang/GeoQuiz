@@ -1,5 +1,3 @@
 package com.lengzhang.android.geoquiz
 
-import androidx.annotation.StringRes
-
-data class Question(@StringRes val textResId: Int, val answer: Boolean)
+data class Question(val question: String, val answer: Boolean)

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="questions">
+        <item>The whale is a fish.</item>
+        <item>The dolphin is not a mammal.</item>
+        <item>The Nile crosses Sudan.</item>
+        <item>The longest part of human body is leg.</item>
+        <item>1 byte is normally made from 8-bit.</item>
+        <item>The hardware is all that in the PC has weight.</item>
+        <item>Sun and Moon can be simultaneously in the sky.</item>
+        <item>The prologue is the final part of a book.</item>
+        <item>During the day you can not see stars.</item>
+        <item>The epicenter is the point from which is originated an earthquake.</item>
+    </string-array>
+</resources>
