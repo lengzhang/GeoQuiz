@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="answers">
-        <item>False</item>
-        <item>True</item>
-        <item>False</item>
-        <item>True</item>
-        <item>True</item>
-        <item>False</item>
-        <item>True</item>
-        <item>True</item>
-        <item>False</item>
-        <item>True</item>
-        <item>True</item>
-        <item>True</item>
-        <item>False</item>
-        <item>True</item>
-        <item>True</item>
-        <item>False</item>
-        <item>False</item>
-        <item>True</item>
-        <item>False</item>
-        <item>True</item>
+        <item>FALSE</item>
+        <item>TRUE</item>
+        <item>FALSE</item>
+        <item>TRUE</item>
+        <item>TRUE</item>
+        <item>FALSE</item>
+        <item>TRUE</item>
+        <item>TRUE</item>
+        <item>FALSE</item>
+        <item>TRUE</item>
+        <item>TRUE</item>
+        <item>TRUE</item>
+        <item>FALSE</item>
+        <item>TRUE</item>
+        <item>TRUE</item>
+        <item>FALSE</item>
+        <item>FALSE</item>
+        <item>TRUE</item>
+        <item>FALSE</item>
+        <item>TRUE</item>
     </string-array>
 </resources>
