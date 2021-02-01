@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var previousButton: Button
     private lateinit var nextButton: Button
     private lateinit var cheatButton: Button
+    private lateinit var questionLabelView: TextView
     private lateinit var questionTextView: TextView
 
     private val quizViewModel: QuizViewModel by lazy {
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         previousButton = findViewById(R.id.previous_button)
         nextButton = findViewById(R.id.next_button)
         cheatButton = findViewById(R.id.cheat_button)
+        questionLabelView = findViewById(R.id.question_label_view)
         questionTextView = findViewById(R.id.question_text_view)
 
         trueButton.setOnClickListener {
@@ -120,6 +122,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateQuestion() {
+        val questionLabel = "Question ${quizViewModel.currentIndex + 1}："
+        questionLabelView.text = questionLabel
         val questionText = quizViewModel.currentQuestionText
         questionTextView.text = questionText
     }

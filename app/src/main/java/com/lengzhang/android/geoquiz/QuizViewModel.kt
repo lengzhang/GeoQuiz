@@ -1,6 +1,7 @@
 package com.lengzhang.android.geoquiz
 
 import androidx.lifecycle.ViewModel
+import java.util.*
 
 class QuizViewModel : ViewModel() {
 
@@ -29,7 +30,7 @@ class QuizViewModel : ViewModel() {
     fun setQuestionBank(questions: Array<String>, answers: Array<String>) {
         for ((index, question) in questions.withIndex()) {
             val answer =
-                    if (index < answers.size) answers[index].toLowerCase() == "true"
+                    if (index < answers.size) answers[index] == "TRUE"
                     else true
             questionBank.add(Question(question, answer))
         }

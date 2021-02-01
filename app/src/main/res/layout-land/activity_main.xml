@@ -6,35 +6,62 @@
     android:layout_height="match_parent"
     tools:context="com.lengzhang.android.geoquiz.MainActivity">
 
-    <TextView
-        android:id="@+id/question_text_view"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:padding="24dp" />
+        android:layout_gravity="center">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal">
-
-        <Button
-            android:id="@+id/true_button"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/true_button" />
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <Button
-            android:id="@+id/false_button"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/false_button" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/question_label_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
+
+                <TextView
+                    android:id="@+id/question_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/true_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/true_button" />
+
+                <Button
+                    android:id="@+id/false_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/false_button" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <Button
         android:id="@+id/previous_button"
@@ -42,8 +69,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
+        android:layout_marginStart="4dp"
         android:text="@string/previous_button"
-        app:icon="@drawable/arrow_left" />
+        app:icon="@drawable/arrow_left"/>
 
     <Button
         android:id="@+id/cheat_button"
@@ -59,6 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:layout_marginEnd="4dp"
         android:text="@string/next_button"
         app:icon="@drawable/arrow_right"
         app:iconGravity="end" />
