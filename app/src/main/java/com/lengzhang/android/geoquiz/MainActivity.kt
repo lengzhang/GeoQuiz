@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -13,7 +12,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 
 private const val TAG = "MainActivity"
-private const val KEY_INDEX = "index"
 private const val REQUEST_CODE_CHEAT = 0
 
 class MainActivity : AppCompatActivity() {
@@ -34,14 +32,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate(Bundle?) called")
 
-        val questions: Array<String> = resources.getStringArray(R.array.questions)
-        val answers: Array<String> = resources.getStringArray(R.array.answers)
-        quizViewModel.setQuestionBank(questions, answers)
+        quizViewModel.handleOnCreate(savedInstanceState, resources)
+
+//        val questions: Array<String> = resources.getStringArray(R.array.questions)
+//        val answers: Array<String> = resources.getStringArray(R.array.answers)
+//        val responses = savedInstanceState?.getIntArray(KEY_RESPONSES) ?: IntArray(0)
+//        quizViewModel.setQuestionBank(questions, answers, responses)
 
         setContentView(R.layout.activity_main)
 
-        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
-        quizViewModel.currentIndex = currentIndex
+//        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+//        quizViewModel.currentIndex = currentIndex
 
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
@@ -53,10 +54,12 @@ class MainActivity : AppCompatActivity() {
 
         trueButton.setOnClickListener {
             checkAnswer(true)
+            updateAnswerButton()
         }
 
         falseButton.setOnClickListener {
             checkAnswer(false)
+            updateAnswerButton()
         }
 
         previousButton.setOnClickListener {
@@ -109,7 +112,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         super.onSaveInstanceState(savedInstanceState)
         Log.i(TAG, "onSaveInstanceState")
-        savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
+        quizViewModel.handleOnSavedInstanceState(savedInstanceState)
     }
 
     override fun onStop() {
@@ -127,6 +130,13 @@ class MainActivity : AppCompatActivity() {
         questionLabelView.text = questionLabel
         val questionText = quizViewModel.currentQuestionText
         questionTextView.text = questionText
+        updateAnswerButton()
+    }
+
+    private fun updateAnswerButton() {
+        val isEnabled = quizViewModel.currentResponse == 0
+        trueButton.isEnabled = isEnabled
+        falseButton.isEnabled = isEnabled
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
@@ -137,6 +147,8 @@ class MainActivity : AppCompatActivity() {
             userAnswer == correctAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }
+
+        quizViewModel.setResponse(userAnswer)
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
