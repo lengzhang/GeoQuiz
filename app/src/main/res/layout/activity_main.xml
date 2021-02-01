@@ -66,39 +66,41 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <FrameLayout
-        android:layout_width="320dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp">
 
-        <Button
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <ImageButton
             android:id="@+id/previous_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/previous_button"
-            app:icon="@drawable/arrow_left"/>
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/arrow_left"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/previous_button"
+            android:tint="?attr/colorPrimary" />
 
         <Button
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:id="@+id/cheat_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="24dp"
             android:text="@string/cheat_button"/>
 
-        <Button
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        <ImageButton
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/next_button"
-            app:icon="@drawable/arrow_right"
-            app:iconGravity="end"/>
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/arrow_right"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/next_button"
+            android:tint="?attr/colorPrimary"/>
 
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>
