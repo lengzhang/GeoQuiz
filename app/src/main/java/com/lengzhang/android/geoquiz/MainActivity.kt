@@ -66,7 +66,11 @@ class MainActivity : AppCompatActivity() {
 
         cheatButton.setOnClickListener {
             val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
+            val isCheater = quizViewModel.isCheater
+            val intent = CheatActivity.newIntent(
+                    this@MainActivity,
+                    answerIsTrue,
+                    isCheater)
             startActivityForResult(intent, REQUEST_CODE_CHEAT)
         }
 
@@ -140,7 +144,9 @@ class MainActivity : AppCompatActivity() {
             else -> R.string.incorrect_toast
         }
 
-        quizViewModel.setResponse(userAnswer)
+        if (!quizViewModel.isCheater) {
+            quizViewModel.setResponse(userAnswer)
+        }
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
