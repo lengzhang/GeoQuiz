@@ -19,5 +19,5 @@ The application is built by following chapters of [Android Programming: The Big 
 - [x] From Button to ImageButton (page 57)
 - [x] Prevent Repeating Answers (page 76)
 - [x] Graded Quiz (page 76)
-- [ ] Closing Loopholes for Cheaters (page 134)
-- [ ] Tracking Cheat Status by Question (page 134)
+- [x] Closing Loopholes for Cheaters (page 134)
+- [x] Tracking Cheat Status by Question (page 134)
