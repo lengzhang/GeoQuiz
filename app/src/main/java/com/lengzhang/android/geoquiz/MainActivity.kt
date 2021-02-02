@@ -34,15 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         quizViewModel.handleOnCreate(savedInstanceState, resources)
 
-//        val questions: Array<String> = resources.getStringArray(R.array.questions)
-//        val answers: Array<String> = resources.getStringArray(R.array.answers)
-//        val responses = savedInstanceState?.getIntArray(KEY_RESPONSES) ?: IntArray(0)
-//        quizViewModel.setQuestionBank(questions, answers, responses)
-
         setContentView(R.layout.activity_main)
-
-//        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
-//        quizViewModel.currentIndex = currentIndex
 
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
@@ -152,5 +144,12 @@ class MainActivity : AppCompatActivity() {
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
+
+        if (quizViewModel.responseCount == quizViewModel.numberOfQuestions) {
+            val grade = quizViewModel.grade.toFloat() / quizViewModel.numberOfQuestions * 100
+            val message = "Your grade is ${String.format("%.2f", grade)}%"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT)
+                    .show()
+        }
     }
 }

@@ -11,11 +11,13 @@ private const val KEY_RESPONSES = "responses"
 class QuizViewModel : ViewModel() {
 
     private var isInitialized = false
+    private val questionBank = mutableListOf<Question>()
 
     var currentIndex = 0
     var isCheater = false
 
-    private val questionBank = mutableListOf<Question>()
+    var grade = 0
+    var responseCount = 0
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
@@ -25,6 +27,9 @@ class QuizViewModel : ViewModel() {
 
     val currentResponse: Int
         get() = questionBank[currentIndex].response
+
+    val numberOfQuestions: Int
+        get() = questionBank.size
 
     fun moveToPrevious() {
         currentIndex = when (currentIndex) {
@@ -37,10 +42,14 @@ class QuizViewModel : ViewModel() {
         currentIndex = (currentIndex + 1) % questionBank.size
     }
 
-    fun setResponse(value: Boolean) {
-        questionBank[currentIndex].response = when (value) {
-            true -> 1
-            false -> -1
+    fun setResponse(userAnswer: Boolean) {
+        if (questionBank[currentIndex].response == 0) {
+            questionBank[currentIndex].response = when (userAnswer) {
+                true -> 1
+                false -> -1
+            }
+            responseCount++
+            if (userAnswer == currentQuestionAnswer) grade++
         }
     }
 
