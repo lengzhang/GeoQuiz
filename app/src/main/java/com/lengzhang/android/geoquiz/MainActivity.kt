@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateQuestion() {
-        val questionLabel = "Question ${quizViewModel.currentIndex + 1} ${quizViewModel.grade} / ${quizViewModel.responseCount}："
+        val questionLabel = "Question ${quizViewModel.currentIndex + 1}："
         questionLabelView.text = questionLabel
         val questionText = quizViewModel.currentQuestionText
         questionTextView.text = questionText
