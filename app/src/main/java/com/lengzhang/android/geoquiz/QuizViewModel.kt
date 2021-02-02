@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 //private const val TAG = "QuizViewModel"
 private const val KEY_INDEX = "index"
 private const val KEY_RESPONSES = "responses"
+private const val KEY_GRADE = "grade"
+private const val KEY_RESPONSE_COUNT = "response_count"
 
 class QuizViewModel : ViewModel() {
 
@@ -14,7 +16,6 @@ class QuizViewModel : ViewModel() {
     private val questionBank = mutableListOf<Question>()
 
     var currentIndex = 0
-    var isCheater = false
 
     var grade = 0
     var responseCount = 0
@@ -25,8 +26,15 @@ class QuizViewModel : ViewModel() {
     val currentQuestionText: String
         get() = questionBank[currentIndex].question
 
-    val currentResponse: Int
-        get() = questionBank[currentIndex].response
+    val currentUserAnswer: Boolean?
+        get() = when(questionBank[currentIndex].response) {
+            1 -> true
+            2 -> false
+            else -> null
+        }
+
+    val currentIsCheater: Boolean
+        get() = questionBank[currentIndex].response == 3
 
     val numberOfQuestions: Int
         get() = questionBank.size
@@ -42,14 +50,22 @@ class QuizViewModel : ViewModel() {
         currentIndex = (currentIndex + 1) % questionBank.size
     }
 
-    fun setResponse(userAnswer: Boolean) {
+    fun setUserAnswer(userAnswer: Boolean) {
         if (questionBank[currentIndex].response == 0) {
-            questionBank[currentIndex].response = when (userAnswer) {
-                true -> 1
-                false -> -1
-            }
+            questionBank[currentIndex].response =
+                    when (userAnswer) {
+                        true -> 1
+                        false -> 2
+                    }
             responseCount++
             if (userAnswer == currentQuestionAnswer) grade++
+        }
+    }
+
+    fun setIsCheater() {
+        if (questionBank[currentIndex].response == 0) {
+            questionBank[currentIndex].response = 3
+            responseCount++
         }
     }
 
@@ -57,6 +73,8 @@ class QuizViewModel : ViewModel() {
         if (isInitialized) return
 
         currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+        grade = savedInstanceState?.getInt(KEY_GRADE, 0) ?: 0
+        responseCount = savedInstanceState?.getInt(KEY_RESPONSE_COUNT, 0) ?: 0
 
         val questions: Array<String> = resources.getStringArray(R.array.questions)
         val answers: Array<String> = resources.getStringArray(R.array.answers)
@@ -76,6 +94,8 @@ class QuizViewModel : ViewModel() {
 
     fun handleOnSavedInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.putInt(KEY_INDEX, currentIndex)
+        savedInstanceState.putInt(KEY_GRADE, grade)
+        savedInstanceState.putInt(KEY_RESPONSE_COUNT, responseCount)
 
         val responses = questionBank.map { question -> question.response }
         savedInstanceState.putIntArray(KEY_RESPONSES, responses.toIntArray())

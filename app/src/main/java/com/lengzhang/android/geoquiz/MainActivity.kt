@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         cheatButton.setOnClickListener {
             val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val isCheater = quizViewModel.isCheater
+            val isCheater = quizViewModel.currentIsCheater
             val intent = CheatActivity.newIntent(
                     this@MainActivity,
                     answerIsTrue,
@@ -85,8 +85,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (requestCode == REQUEST_CODE_CHEAT) {
-            quizViewModel.isCheater =
+            val isCheater =
                 data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+            if (!quizViewModel.currentIsCheater && isCheater) {
+                quizViewModel.setIsCheater()
+                if (quizViewModel.currentIsCheater) {
+                    updateQuestion()
+                    showGrade()
+                }
+            }
         }
     }
 
@@ -122,7 +129,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateQuestion() {
-        val questionLabel = "Question ${quizViewModel.currentIndex + 1}："
+        val questionLabel = "Question ${quizViewModel.currentIndex + 1} ${quizViewModel.grade} / ${quizViewModel.responseCount}："
         questionLabelView.text = questionLabel
         val questionText = quizViewModel.currentQuestionText
         questionTextView.text = questionText
@@ -130,27 +137,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateAnswerButton() {
-        val isEnabled = quizViewModel.currentResponse == 0
+        val isEnabled = quizViewModel.currentUserAnswer == null
         trueButton.isEnabled = isEnabled
         falseButton.isEnabled = isEnabled
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
+        if (quizViewModel.currentIsCheater) {
+            Toast.makeText(this, R.string.judgment_toast, Toast.LENGTH_SHORT)
+                    .show()
+            return
+        }
+
         val correctAnswer  = quizViewModel.currentQuestionAnswer
 
-        val messageResId = when {
-            quizViewModel.isCheater -> R.string.judgment_toast
-            userAnswer == correctAnswer -> R.string.correct_toast
-            else -> R.string.incorrect_toast
-        }
+        val messageResId =
+                if (userAnswer == correctAnswer) R.string.correct_toast
+                else R.string.incorrect_toast
 
-        if (!quizViewModel.isCheater) {
-            quizViewModel.setResponse(userAnswer)
-        }
+        quizViewModel.setUserAnswer(userAnswer)
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
-            .show()
+                .show()
 
+        updateQuestion()
+        showGrade()
+    }
+
+    private fun showGrade() {
         if (quizViewModel.responseCount == quizViewModel.numberOfQuestions) {
             val grade = quizViewModel.grade.toFloat() / quizViewModel.numberOfQuestions * 100
             val message = "Your grade is ${String.format("%.2f", grade)}%"
