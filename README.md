@@ -15,9 +15,9 @@ The application is built by following chapters of [Android Programming: The Big 
 
 ## Challenges:
 - [x] Personalized the quiz with own questions and answers.
-- [ ] Add a Previous Button (page 56)
-- [ ] From Button to ImageButton (page 57)
-- [ ] Prevent Repeating Answers (page 76)
-- [ ] Graded Quiz (page 76)
+- [x] Add a Previous Button (page 56)
+- [x] From Button to ImageButton (page 57)
+- [x] Prevent Repeating Answers (page 76)
+- [x] Graded Quiz (page 76)
 - [ ] Closing Loopholes for Cheaters (page 134)
 - [ ] Tracking Cheat Status by Question (page 134)
